@@ -18,9 +18,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="20dp"
-                android:text="Change Environment Demo"
+                android:text="Change Configuration Demo"
                 android:textColor="@color/black"
-                android:textSize="30dp" />
+                android:textSize="28dp" />
 
             <Button
                 android:id="@+id/version"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="20dp"
-                android:text="Environment Type : "
+                android:text="Configuration Type : "
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 

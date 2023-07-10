@@ -16,17 +16,17 @@ class SettingsActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.settings_activity)
 
         var currentEnviroment = ""
-        when (getPref(this).getInt(SharedPrefVariableNames.Environment.value, 0)) {
-            EnvironmentType.DEBUG.value -> {
+        when (getPref(this).getInt(SharedPrefVariableNames.Configuration.value, 0)) {
+            Configurations.DEBUG.value -> {
                 currentEnviroment = "DEBUG"
             }
-            EnvironmentType.QA.value -> {
+            Configurations.QA.value -> {
                 currentEnviroment = "QA"
             }
-            EnvironmentType.STAGING.value -> {
+            Configurations.STAGING.value -> {
                 currentEnviroment = "STAGING"
             }
-            EnvironmentType.PROD.value -> {
+            Configurations.PROD.value -> {
                 currentEnviroment = "PRODUCTION"
             }
         }
@@ -40,11 +40,11 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.version.setOnClickListener {
             if (++versionClickCount >= 5) {
-                val msg = when (getPref(this).getInt(SharedPrefVariableNames.Environment.value, 0)) {
-                    EnvironmentType.DEBUG.value -> "Initialize QA Environment settings?"
-                    EnvironmentType.QA.value -> "Initialize Staging Environment settings?"
-                    EnvironmentType.STAGING.value -> "Initialize Production Environment settings?"
-                    EnvironmentType.PROD.value -> "Initialize Development Environment settings?"
+                val msg = when (getPref(this).getInt(SharedPrefVariableNames.Configuration.value, 0)) {
+                    Configurations.DEBUG.value -> "Initialize QA Environment settings?"
+                    Configurations.QA.value -> "Initialize Staging Environment settings?"
+                    Configurations.STAGING.value -> "Initialize Production Environment settings?"
+                    Configurations.PROD.value -> "Initialize Development Environment settings?"
                     else -> "Initialize Development Environment settings?"
                 }
                 val snack = Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
@@ -52,8 +52,8 @@ class SettingsActivity : AppCompatActivity() {
                 snack.setActionTextColor(ContextCompat.getColor(this, R.color.yellow))
                 snack.setAction("CHANGE") {
                     getPref(this).edit().putInt(
-                        SharedPrefVariableNames.Environment.value,
-                        (getPref(this).getInt(SharedPrefVariableNames.Environment.value, 0) + 1) % 4
+                        SharedPrefVariableNames.Configuration.value,
+                        (getPref(this).getInt(SharedPrefVariableNames.Configuration.value, 0) + 1) % 4
                     ).commit()
                     restartActivity(intent, this)
                 }

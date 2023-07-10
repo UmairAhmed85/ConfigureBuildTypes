@@ -10,10 +10,10 @@ fun getPref(context: Context): SharedPreferences {
 }
 
 enum class SharedPrefVariableNames(val value: String) {
-    Environment("environment")
+    Configuration("environment")
 }
 
-enum class EnvironmentType(val value: Int) {
+enum class Configurations(val value: Int) {
     DEBUG(0),
     QA(1),
     STAGING(2),
