@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+def BUILD_TYPE = "BUILD_TYPE"
+def DEVELOPMENT = '0'
+def QA = '1'
+def STAGING = '2'
+def PRODUCTION = '3'
+def INT = "int"
+
+android {
+    namespace 'com.changebuildtype'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.changebuildtype"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue "string", "GOOGLE_API_KEY", "Google Release-Api-Key"
+        resValue "string", "THIRD_PARTY_LIBRARY", "Third-Party-Api-Key"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField INT, BUILD_TYPE, DEVELOPMENT
+        }
+        qa {
+            buildConfigField INT, BUILD_TYPE, QA
+        }
+        staging {
+            buildConfigField INT, BUILD_TYPE, STAGING
+        }
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField INT, BUILD_TYPE, PRODUCTION
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+    }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.preference:preference:1.2.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
